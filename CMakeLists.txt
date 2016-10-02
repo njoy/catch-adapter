@@ -25,6 +25,6 @@ message( STATUS "" )
 message( STATUS "-----------------------------------------------------------" ) 
 message( STATUS "" ) 
 
-add_library( catch-adapter INTERFACE ) 
+add_library( catch-adapter INTERFACE GLOBAL ) 
 target_include_directories( catch-adapter INTERFACE src/single-include ) 
 
