@@ -1,10 +1,5 @@
 {
-"unit_tests": {},
-"language": "c++",
-"include_path": "src/single-include",
 "name": "catch-adapter",
-"implementation_files": [],
-"is_external_project": true,
 "header_files": [
 "src/include/catch.hpp",
 "src/include/catch_session.hpp",
@@ -109,5 +104,10 @@
 "src/single_include/catch.hpp"
 ],
 "version": "0.0.1",
-"type": "include"
+"implementation_files": [],
+"language": "c++",
+"type": "include",
+"include_path": "src/single_include",
+"is_external_project": true,
+"unit_tests": {}
 }
