@@ -1,4 +1,10 @@
 {
+"is_external_project": true,
+"version": "0.0.1",
+"language": "c++",
+"name": "catch-adapter",
+"language_revision": "C++14",
+"implementation_files": [],
 "header_files": [
 "src/include/catch.hpp",
 "src/include/catch_session.hpp",
@@ -102,13 +108,7 @@
 "src/projects/XCode/OCTest/OCTest/TestObj.h",
 "src/single_include/catch.hpp"
 ],
-"language_revision": "C++14",
-"target": "include",
-"name": "catch-adapter",
-"language": "c++",
 "include_path": "src/single_include",
-"unit_tests": {},
-"is_external_project": true,
-"version": "0.0.1",
-"implementation_files": []
+"target": "include",
+"unit_tests": {}
 }
