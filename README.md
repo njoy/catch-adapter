@@ -2,7 +2,7 @@
 A repository which adapts the [Catch](https://github.com/philsquared/Catch) Unit Test project for use in the NJOY21 build scheme.
 
 ## Git Subtree
-This repository uses a git subtree for the directory `src`. The remote from which the subtree is made is located at [https://github.com/philsquared/Catch.git](https://github.com/philsquared/Catch.git). Equivalently, you can use the ssh location at `git@github.com:fmtlib/fmt.git`.
+This repository uses a git subtree for the directory `src`. The remote from which the subtree is made is located at [https://github.com/philsquared/Catch.git](https://github.com/philsquared/Catch.git). Equivalently, you can use the ssh location at `git@github.com:philsquared/Catch.git`.
 
 To facilitate updating the subtree when it gets updated upstream, do the following:
 
