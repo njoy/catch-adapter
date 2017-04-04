@@ -1,6 +1,8 @@
 cmake_minimum_required( VERSION 3.2 ) 
 
-project( catch-adapter VERSION 0.0.1 LANGUAGES CXX )
+project( catch-adapter LANGUAGES CXX )
+get_directory_property( is_subproject PARENT_DIRECTORY )
+include( CMakeDependentOption REQUIRED )
 
 if ( NOT GIT_EXECUTABLE )
     find_package( Git )
@@ -8,6 +10,7 @@ if ( NOT GIT_EXECUTABLE )
         message( FATAL_ERROR "git installation was not found." )
     endif()
 endif()
+
 execute_process(
     COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
@@ -19,18 +22,15 @@ execute_process(
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     OUTPUT_VARIABLE GIT_HASH
     OUTPUT_STRIP_TRAILING_WHITESPACE
-)
+) 
 
 message( STATUS "" )
 message( STATUS "-----------------------------------------------------------" )
 message( STATUS "" )
-message( STATUS "catch-adapter Version: 0.0.1" )
+message( STATUS "catch-adapter" )
 message( STATUS "Git current branch: ${GIT_BRANCH}" )
 message( STATUS "Git commit hash: ${GIT_HASH}" )
 message( STATUS "" )
-message( STATUS "-----------------------------------------------------------" ) 
-message( STATUS "" ) 
-
+message( STATUS "-----------------------------------------------------------" )
 add_library( catch-adapter INTERFACE )
-target_include_directories( catch-adapter INTERFACE src/single_include )
-
+target_include_directories( catch-adapter INTERFACE "src/single_include" )
