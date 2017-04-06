@@ -32,6 +32,8 @@ message( STATUS "Git current branch: ${GIT_BRANCH}" )
 message( STATUS "Git commit hash: ${GIT_HASH}" )
 message( STATUS "" )
 message( STATUS "-----------------------------------------------------------" )
-
-add_library( catch-adapter INTERFACE )
 target_include_directories( catch-adapter INTERFACE src/single_include )
+target_sources( catch-adapter INTERFACE
+                "${CMAKE_CURRENT_SOURCE_DIR}/src/single_include/catch.hpp" )
+target_include_directories( catch-adapter INTERFACE 
+                            "${CMAKE_CURRENT_SOURCE_DIR}/src/single_include" )
