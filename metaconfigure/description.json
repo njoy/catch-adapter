@@ -1,372 +1,4 @@
 {
-  "compiler": {
-    "apple clang++": {
-      "minimum version": "8.0",
-      "osx": {
-        "flags": {
-          "base project": [],
-          "common": [
-            "-stdlib=libc++"
-          ],
-          "coverage": [
-            "--coverage"
-          ],
-          "debug": [
-            "-O0",
-            "-g",
-            "-gdwarf-3",
-            "-frounding-math",
-            "-fsignaling-nans"
-          ],
-          "link time optimization": [
-            "-flto"
-          ],
-          "nonportable optimization": [
-            "-march=native"
-          ],
-          "optimization": [
-            "-O3",
-            "-DNDEBUG"
-          ],
-          "profile generate": [
-            "-fprofile-generate='{profile_path}'"
-          ],
-          "profile use": [
-            "-fprofile-use='{profile_path}'"
-          ],
-          "static": [
-            "-static"
-          ],
-          "strict": [
-            "-Werror"
-          ],
-          "subproject": [],
-          "warning": [
-            "-Wall",
-            "-Wextra",
-            "-Wpedantic"
-          ]
-        },
-        "standard": {
-          "c++11": "-std=c++11",
-          "c++14": "-std=c++14",
-          "c++98": "-std=c++98"
-        }
-      }
-    },
-    "g++": {
-      "linux": {
-        "flags": {
-          "base project": [],
-          "common": [
-            "-stdlib=libstdc++"
-          ],
-          "coverage": [
-            "--coverage"
-          ],
-          "debug": [
-            "-O0",
-            "-g",
-            "-gdwarf-3",
-            "-frounding-math",
-            "-fsignaling-nans"
-          ],
-          "link time optimization": [
-            "-flto"
-          ],
-          "nonportable optimization": [
-            "-march=native"
-          ],
-          "optimization": [
-            "-O3",
-            "-DNDEBUG"
-          ],
-          "profile generate": [
-            "-fprofile-generate='{profile_path}'"
-          ],
-          "profile use": [
-            "-fprofile-use='{profile_path}'"
-          ],
-          "static": [
-            "-static"
-          ],
-          "strict": [
-            "-Werror"
-          ],
-          "subproject": [],
-          "warning": [
-            "-Wall",
-            "-Wextra",
-            "-Wpedantic"
-          ]
-        },
-        "standard": {
-          "c++11": "-std=c++11",
-          "c++14": "-std=c++14",
-          "c++98": "-std=c++98"
-        }
-      },
-      "minimum version": "6.2",
-      "osx": {
-        "flags": {
-          "base project": [],
-          "common": [
-            "-stdlib=libc++"
-          ],
-          "coverage": [
-            "--coverage"
-          ],
-          "debug": [
-            "-O0",
-            "-g",
-            "-gdwarf-3",
-            "-frounding-math",
-            "-fsignaling-nans"
-          ],
-          "link time optimization": [
-            "-flto"
-          ],
-          "nonportable optimization": [
-            "-march=native"
-          ],
-          "optimization": [
-            "-O3",
-            "-DNDEBUG"
-          ],
-          "profile generate": [
-            "-fprofile-generate='{profile_path}'"
-          ],
-          "profile use": [
-            "-fprofile-use='{profile_path}'"
-          ],
-          "static": [
-            "-static"
-          ],
-          "strict": [
-            "-Werror"
-          ],
-          "subproject": [],
-          "warning": [
-            "-Wall",
-            "-Wextra",
-            "-Wpedantic"
-          ]
-        },
-        "standard": {
-          "c++11": "-std=c++11",
-          "c++14": "-std=c++14",
-          "c++98": "-std=c++98"
-        }
-      },
-      "windows": {
-        "flags": {
-          "base project": [],
-          "common": [
-            "-stdlib=libstdc++"
-          ],
-          "coverage": [
-            "--coverage"
-          ],
-          "debug": [
-            "-O0",
-            "-g",
-            "-gdwarf-3",
-            "-frounding-math",
-            "-fsignaling-nans"
-          ],
-          "link time optimization": [
-            "-flto"
-          ],
-          "nonportable optimization": [
-            "-march=native"
-          ],
-          "optimization": [
-            "-O3",
-            "-DNDEBUG"
-          ],
-          "profile generate": [
-            "-fprofile-generate='{profile_path}'"
-          ],
-          "profile use": [
-            "-fprofile-use='{profile_path}'"
-          ],
-          "static": [
-            "-static"
-          ],
-          "strict": [
-            "-Werror"
-          ],
-          "subproject": [],
-          "warning": [
-            "-Wall",
-            "-Wextra",
-            "-Wpedantic"
-          ]
-        },
-        "standard": {
-          "c++11": "-std=c++11",
-          "c++14": "-std=c++14",
-          "c++98": "-std=c++98"
-        }
-      }
-    },
-    "llvm clang++": {
-      "linux": {
-        "flags": {
-          "base project": [],
-          "common": [
-            "-stdlib=libstdc++"
-          ],
-          "coverage": [
-            "--coverage"
-          ],
-          "debug": [
-            "-O0",
-            "-g",
-            "-gdwarf-3",
-            "-frounding-math",
-            "-fsignaling-nans"
-          ],
-          "link time optimization": [
-            "-flto"
-          ],
-          "nonportable optimization": [
-            "-march=native"
-          ],
-          "optimization": [
-            "-O3",
-            "-DNDEBUG"
-          ],
-          "profile generate": [
-            "-fprofile-generate='{profile_path}'"
-          ],
-          "profile use": [
-            "-fprofile-use='{profile_path}'"
-          ],
-          "static": [
-            "-static"
-          ],
-          "strict": [
-            "-Werror"
-          ],
-          "subproject": [],
-          "warning": [
-            "-Wall",
-            "-Wextra",
-            "-Wpedantic"
-          ]
-        },
-        "standard": {
-          "c++11": "-std=c++11",
-          "c++14": "-std=c++14",
-          "c++98": "-std=c++98"
-        }
-      },
-      "minimum version": "3.8",
-      "osx": {
-        "flags": {
-          "base project": [],
-          "common": [
-            "-stdlib=libc++"
-          ],
-          "coverage": [
-            "--coverage"
-          ],
-          "debug": [
-            "-O0",
-            "-g",
-            "-gdwarf-3",
-            "-frounding-math",
-            "-fsignaling-nans"
-          ],
-          "link time optimization": [
-            "-flto"
-          ],
-          "nonportable optimization": [
-            "-march=native"
-          ],
-          "optimization": [
-            "-O3",
-            "-DNDEBUG"
-          ],
-          "profile generate": [
-            "-fprofile-generate='{profile_path}'"
-          ],
-          "profile use": [
-            "-fprofile-use='{profile_path}'"
-          ],
-          "static": [
-            "-static"
-          ],
-          "strict": [
-            "-Werror"
-          ],
-          "subproject": [],
-          "warning": [
-            "-Wall",
-            "-Wextra",
-            "-Wpedantic"
-          ]
-        },
-        "standard": {
-          "c++11": "-std=c++11",
-          "c++14": "-std=c++14",
-          "c++98": "-std=c++98"
-        }
-      },
-      "windows": {
-        "flags": {
-          "base project": [],
-          "common": [
-            "-stdlib=libc++"
-          ],
-          "coverage": [
-            "--coverage"
-          ],
-          "debug": [
-            "-O0",
-            "-g",
-            "-gdwarf-3",
-            "-frounding-math",
-            "-fsignaling-nans"
-          ],
-          "link time optimization": [
-            "-flto"
-          ],
-          "nonportable optimization": [
-            "-march=native"
-          ],
-          "optimization": [
-            "-O3",
-            "-DNDEBUG"
-          ],
-          "profile generate": [
-            "-fprofile-generate='{profile_path}'"
-          ],
-          "profile use": [
-            "-fprofile-use='{profile_path}'"
-          ],
-          "static": [
-            "-static"
-          ],
-          "strict": [
-            "-Werror"
-          ],
-          "subproject": [],
-          "warning": [
-            "-Wall",
-            "-Wextra",
-            "-Wpedantic"
-          ]
-        },
-        "standard": {
-          "c++11": "-std=c++11",
-          "c++14": "-std=c++14",
-          "c++98": "-std=c++98"
-        }
-      }
-    }
-  },
   "file extension": {
     "header files": [
       "h++",
@@ -396,6 +28,7 @@
     "src/include/internal/catch_context_impl.hpp",
     "src/include/internal/catch_debugger.hpp",
     "src/include/internal/catch_default_main.hpp",
+    "src/include/internal/catch_errno_guard.hpp",
     "src/include/internal/catch_evaluate.hpp",
     "src/include/internal/catch_exception_translator_registry.hpp",
     "src/include/internal/catch_expression_lhs.hpp",
@@ -406,6 +39,7 @@
     "src/include/internal/catch_legacy_reporter_adapter.hpp",
     "src/include/internal/catch_list.hpp",
     "src/include/internal/catch_matchers.hpp",
+    "src/include/internal/catch_matchers_string.hpp",
     "src/include/internal/catch_message.hpp",
     "src/include/internal/catch_notimplemented_exception.hpp",
     "src/include/internal/catch_objc.hpp",
@@ -430,69 +64,61 @@
     "src/include/internal/catch_timer.hpp",
     "src/include/internal/catch_tostring.hpp",
     "src/include/internal/catch_totals.hpp",
+    "src/include/internal/catch_type_traits.hpp",
     "src/include/internal/catch_version.hpp",
     "src/include/internal/catch_wildcard_pattern.hpp",
     "src/include/internal/catch_xmlwriter.hpp",
+    "src/include/reporters/catch_reporter_automake.hpp",
     "src/include/reporters/catch_reporter_bases.hpp",
     "src/include/reporters/catch_reporter_compact.hpp",
     "src/include/reporters/catch_reporter_console.hpp",
     "src/include/reporters/catch_reporter_junit.hpp",
     "src/include/reporters/catch_reporter_multi.hpp",
+    "src/include/reporters/catch_reporter_tap.hpp",
     "src/include/reporters/catch_reporter_teamcity.hpp",
     "src/include/reporters/catch_reporter_xml.hpp",
     "src/single_include/catch.hpp"
   ],
-  "implementation files": [
-    "src/projects/SelfTest/ApproxTests.cpp",
-    "src/projects/SelfTest/BDDTests.cpp",
-    "src/projects/SelfTest/ClassTests.cpp",
-    "src/projects/SelfTest/CmdLineTests.cpp",
-    "src/projects/SelfTest/ConditionTests.cpp",
-    "src/projects/SelfTest/EnumToString.cpp",
-    "src/projects/SelfTest/ExceptionTests.cpp",
-    "src/projects/SelfTest/GeneratorTests.cpp",
-    "src/projects/SelfTest/MessageTests.cpp",
-    "src/projects/SelfTest/MiscTests.cpp",
-    "src/projects/SelfTest/PartTrackerTests.cpp",
-    "src/projects/SelfTest/TagAliasTests.cpp",
-    "src/projects/SelfTest/TestMain.cpp",
-    "src/projects/SelfTest/ToStringPair.cpp",
-    "src/projects/SelfTest/ToStringTuple.cpp",
-    "src/projects/SelfTest/ToStringVector.cpp",
-    "src/projects/SelfTest/ToStringWhich.cpp",
-    "src/projects/SelfTest/TrickyTests.cpp",
-    "src/projects/SelfTest/VariadicMacrosTests.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_common.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_console_colour.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_debugger.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_interfaces_capture.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_interfaces_config.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_interfaces_exception.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_interfaces_generators.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_interfaces_registry_hub.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_interfaces_reporter.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_interfaces_runner.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_interfaces_testcase.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_message.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_option.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_ptr.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_stream.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_streambuf.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_test_spec.cpp",
-    "src/projects/SelfTest/SurrogateCpps/catch_xmlwriter.cpp",
-    "src/projects/VS2008/TestCatch/TestCatch/TestCatch.cpp",
-    "src/projects/XCode/CatchSelfTest/CatchSelfTest/catch_text.cpp"
-  ],
-  "include_path": "src/single_include/",
+  "ignore pattern": "Benchmark$",
+  "implementation files": [],
+  "include directory": "src/single_include",
   "initialized": true,
-  "is_external_project": true,
+  "is external project": true,
   "language": "c++",
   "name": "catch-adapter",
-  "standard": "c++14",
+  "standard": "c++11",
   "standards": [
     "c++98",
     "c++11",
     "c++14"
   ],
-  "tests": {}
+  "strict": true,
+  "test pattern": "SelfTest$",
+  "tests": {
+    "projects": [
+      "src/ApproxTests.cpp",
+      "src/BDDTests.cpp",
+      "src/ClassTests.cpp",
+      "src/CmdLineTests.cpp",
+      "src/CompilationTests.cpp",
+      "src/ConditionTests.cpp",
+      "src/EnumToString.cpp",
+      "src/ExceptionTests.cpp",
+      "src/GeneratorTests.cpp",
+      "src/MatchersTests.cpp",
+      "src/MessageTests.cpp",
+      "src/MiscTests.cpp",
+      "src/PartTrackerTests.cpp",
+      "src/TagAliasTests.cpp",
+      "src/TestMain.cpp",
+      "src/ToStringGeneralTests.cpp",
+      "src/ToStringPair.cpp",
+      "src/ToStringTuple.cpp",
+      "src/ToStringVector.cpp",
+      "src/ToStringWhich.cpp",
+      "src/TrickyTests.cpp",
+      "src/VariadicMacrosTests.cpp"
+    ]
+  },
+  "update": false
 }
