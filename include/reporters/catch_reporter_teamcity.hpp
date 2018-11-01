@@ -14,6 +14,7 @@
 // file can be distributed as a single header that works with the main
 // Catch single header.
 
+#include <cassert>
 #include <cstring>
 
 #ifdef __clang__
@@ -49,14 +50,7 @@ namespace Catch {
             return "Reports test results as TeamCity service messages";
         }
 
-        virtual void skipTest( TestCaseInfo const& testInfo ) CATCH_OVERRIDE {
-            stream  << "##teamcity[testIgnored name='"
-                    << escape( testInfo.name ) << "'";
-            if( testInfo.isHidden() )
-                stream << " message='hidden test'";
-            else
-                stream << " message='test skipped because it didn|'t match the test spec'";
-            stream << "]\n";
+        virtual void skipTest( TestCaseInfo const& /* testInfo */ ) CATCH_OVERRIDE {
         }
 
         virtual void noMatchingTestCases( std::string const& /* spec */ ) CATCH_OVERRIDE {}
@@ -134,11 +128,21 @@ namespace Catch {
                         "  " << result.getExpandedExpression() << "\n";
                 }
 
-                stream << "##teamcity[testFailed"
-                    << " name='" << escape( currentTestCaseInfo->name )<< "'"
-                    << " message='" << escape( msg.str() ) << "'"
-                    << "]\n";
+                if( currentTestCaseInfo->okToFail() ) {
+                    msg << "- failure ignore as test marked as 'ok to fail'\n";
+                    stream << "##teamcity[testIgnored"
+                           << " name='" << escape( currentTestCaseInfo->name )<< "'"
+                           << " message='" << escape( msg.str() ) << "'"
+                           << "]\n";
+                }
+                else {
+                    stream << "##teamcity[testFailed"
+                           << " name='" << escape( currentTestCaseInfo->name )<< "'"
+                           << " message='" << escape( msg.str() ) << "'"
+                           << "]\n";
+                }
             }
+            stream.flush();
             return true;
         }
 
@@ -148,9 +152,11 @@ namespace Catch {
         }
 
         virtual void testCaseStarting( TestCaseInfo const& testInfo ) CATCH_OVERRIDE {
+            m_testTimer.start();
             StreamingReporterBase::testCaseStarting( testInfo );
             stream << "##teamcity[testStarted name='"
                 << escape( testInfo.name ) << "']\n";
+            stream.flush();
         }
 
         virtual void testCaseEnded( TestCaseStats const& testCaseStats ) CATCH_OVERRIDE {
@@ -164,7 +170,9 @@ namespace Catch {
                     << escape( testCaseStats.testInfo.name )
                     << "' out='" << escape( testCaseStats.stdErr ) << "']\n";
             stream << "##teamcity[testFinished name='"
-                << escape( testCaseStats.testInfo.name ) << "']\n";
+                    << escape( testCaseStats.testInfo.name ) << "' duration='"
+                    << m_testTimer.getElapsedMilliseconds() << "']\n";
+            stream.flush();
         }
 
     private:
@@ -203,7 +211,7 @@ namespace Catch {
         }
     private:
         bool m_headerPrintedForThisSection;
-
+        Timer m_testTimer;
     };
 
 #ifdef CATCH_IMPL
