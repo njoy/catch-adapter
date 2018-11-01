@@ -29,26 +29,20 @@ namespace Detail {
             m_value( value )
         {}
 
-        Approx( Approx const& other )
-        :   m_epsilon( other.m_epsilon ),
-            m_margin( other.m_margin ),
-            m_scale( other.m_scale ),
-            m_value( other.m_value )
-        {}
-
         static Approx custom() {
             return Approx( 0 );
         }
 
-        Approx operator()( double value ) {
-            Approx approx( value );
+#if defined(CATCH_CONFIG_CPP11_TYPE_TRAITS)
+
+        template <typename T, typename = typename std::enable_if<std::is_constructible<double, T>::value>::type>
+        Approx operator()( T value ) {
+            Approx approx( static_cast<double>(value) );
             approx.epsilon( m_epsilon );
             approx.margin( m_margin );
             approx.scale( m_scale );
             return approx;
         }
-
-#if defined(CATCH_CONFIG_CPP11_TYPE_TRAITS)
 
         template <typename T, typename = typename std::enable_if<std::is_constructible<double, T>::value>::type>
         explicit Approx( T value ): Approx(static_cast<double>(value))
@@ -63,7 +57,8 @@ namespace Detail {
             if (relativeOK) {
                 return true;
             }
-            return std::fabs(lhs_v - rhs.m_value) < rhs.m_margin;
+
+            return std::fabs(lhs_v - rhs.m_value) <= rhs.m_margin;
         }
 
         template <typename T, typename = typename std::enable_if<std::is_constructible<double, T>::value>::type>
@@ -100,14 +95,43 @@ namespace Detail {
         friend bool operator >= ( Approx const& lhs, T rhs ) {
             return lhs.m_value > double(rhs) || lhs == rhs;
         }
+
+        template <typename T, typename = typename std::enable_if<std::is_constructible<double, T>::value>::type>
+        Approx& epsilon( T newEpsilon ) {
+            m_epsilon = double(newEpsilon);
+            return *this;
+        }
+
+        template <typename T, typename = typename std::enable_if<std::is_constructible<double, T>::value>::type>
+        Approx& margin( T newMargin ) {
+            m_margin = double(newMargin);
+            return *this;
+        }
+
+        template <typename T, typename = typename std::enable_if<std::is_constructible<double, T>::value>::type>
+        Approx& scale( T newScale ) {
+            m_scale = double(newScale);
+            return *this;
+        }
+
 #else
+
+        Approx operator()( double value ) {
+            Approx approx( value );
+            approx.epsilon( m_epsilon );
+            approx.margin( m_margin );
+            approx.scale( m_scale );
+            return approx;
+        }
+
+
         friend bool operator == ( double lhs, Approx const& rhs ) {
             // Thanks to Richard Harris for his help refining this formula
             bool relativeOK = std::fabs( lhs - rhs.m_value ) < rhs.m_epsilon * (rhs.m_scale + (std::max)( std::fabs(lhs), std::fabs(rhs.m_value) ) );
             if (relativeOK) {
                 return true;
             }
-            return std::fabs(lhs - rhs.m_value) < rhs.m_margin;
+            return std::fabs(lhs - rhs.m_value) <= rhs.m_margin;
         }
 
         friend bool operator == ( Approx const& lhs, double rhs ) {
@@ -137,7 +161,6 @@ namespace Detail {
         friend bool operator >= ( Approx const& lhs, double rhs ) {
             return lhs.m_value > rhs || lhs == rhs;
         }
-#endif
 
         Approx& epsilon( double newEpsilon ) {
             m_epsilon = newEpsilon;
@@ -153,6 +176,7 @@ namespace Detail {
             m_scale = newScale;
             return *this;
         }
+#endif
 
         std::string toString() const {
             std::ostringstream oss;

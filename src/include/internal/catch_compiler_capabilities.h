@@ -80,12 +80,23 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Cygwin
-#ifdef __CYGWIN__
+// We know some environments not to support full POSIX signals
+#if defined(__CYGWIN__) || defined(__QNX__)
 
 #   if !defined(CATCH_CONFIG_POSIX_SIGNALS)
 #       define CATCH_INTERNAL_CONFIG_NO_POSIX_SIGNALS
 #   endif
+
+#endif
+
+#ifdef __OS400__
+#       define CATCH_INTERNAL_CONFIG_NO_POSIX_SIGNALS
+#       define CATCH_CONFIG_COLOUR_NONE
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+// Cygwin
+#ifdef __CYGWIN__
 
 // Required for some versions of Cygwin to declare gettimeofday
 // see: http://stackoverflow.com/questions/36901803/gettimeofday-not-declared-in-this-scope-cygwin
@@ -163,10 +174,15 @@
 
 // Use __COUNTER__ if the compiler supports it
 #if ( defined _MSC_VER && _MSC_VER >= 1300 ) || \
-    ( defined __GNUC__  && __GNUC__ >= 4 && __GNUC_MINOR__ >= 3 ) || \
+    ( defined __GNUC__  && ( __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3 )) ) || \
     ( defined __clang__ && __clang_major__ >= 3 )
 
-#define CATCH_INTERNAL_CONFIG_COUNTER
+// Use of __COUNTER__ is suppressed during code analysis in CLion/AppCode 2017.2.x and former,
+// because __COUNTER__ is not properly handled by it.
+// This does not affect compilation
+#if ( !defined __JETBRAINS_IDE__ || __JETBRAINS_IDE__ >= 20170300L )
+    #define CATCH_INTERNAL_CONFIG_COUNTER
+#endif
 
 #endif
 
@@ -247,10 +263,7 @@
 #if defined(CATCH_INTERNAL_CONFIG_CPP11_UNIQUE_PTR) && !defined(CATCH_CONFIG_CPP11_NO_UNIQUE_PTR) && !defined(CATCH_CONFIG_CPP11_UNIQUE_PTR) && !defined(CATCH_CONFIG_NO_CPP11)
 #   define CATCH_CONFIG_CPP11_UNIQUE_PTR
 #endif
-// Use of __COUNTER__ is suppressed if __JETBRAINS_IDE__ is #defined (meaning we're being parsed by a JetBrains IDE for
-// analytics) because, at time of writing, __COUNTER__ is not properly handled by it.
-// This does not affect compilation
-#if defined(CATCH_INTERNAL_CONFIG_COUNTER) && !defined(CATCH_CONFIG_NO_COUNTER) && !defined(CATCH_CONFIG_COUNTER) && !defined(__JETBRAINS_IDE__)
+#if defined(CATCH_INTERNAL_CONFIG_COUNTER) && !defined(CATCH_CONFIG_NO_COUNTER) && !defined(CATCH_CONFIG_COUNTER)
 #   define CATCH_CONFIG_COUNTER
 #endif
 #if defined(CATCH_INTERNAL_CONFIG_CPP11_SHUFFLE) && !defined(CATCH_CONFIG_CPP11_NO_SHUFFLE) && !defined(CATCH_CONFIG_CPP11_SHUFFLE) && !defined(CATCH_CONFIG_NO_CPP11)
