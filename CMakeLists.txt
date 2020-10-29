@@ -1,59 +1,57 @@
+########################################################################
+# Preamble
+########################################################################
 
-cmake_minimum_required( VERSION 3.2 )
-set( CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Supported configuration types" FORCE )
-        
-if( NOT is_subproject )
-    if( NOT ROOT_DIRECTORY )
-        set( ROOT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
-    endif()
-    if ( NOT PYTHON_EXECUTABLE )
-        find_package( PythonInterp )
-        if ( NOT PYTHONINTERP_FOUND )
-            message( FATAL_ERROR "Python interpreter installation was not found." )
-        endif()
-    endif()
-    execute_process( COMMAND ${PYTHON_EXECUTABLE} ./metaconfigure/signature.py ${CMAKE_BINARY_DIR}/signature
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                        RESULT_VARIABLE signature_failure )
-    file( READ "${CMAKE_BINARY_DIR}/signature.json" SIGNATURE )
-endif()
-
+cmake_minimum_required( VERSION 3.14 )
 project( catch-adapter LANGUAGES CXX )
-get_directory_property( is_subproject PARENT_DIRECTORY )
-include( CMakeDependentOption REQUIRED )
 
-if ( NOT GIT_EXECUTABLE )
-    find_package( Git )
-    if ( NOT GIT_FOUND )
-        message( FATAL_ERROR "git installation was not found." )
-    endif()
-endif()
 
-execute_process(
-    COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-    OUTPUT_VARIABLE GIT_BRANCH
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-execute_process(
-    COMMAND ${GIT_EXECUTABLE} rev-parse HEAD
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-    OUTPUT_VARIABLE GIT_HASH
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-) 
+########################################################################
+# Project-wide setup
+########################################################################
 
-message( STATUS "" )
-message( STATUS "-----------------------------------------------------------" )
-message( STATUS "" )
-message( STATUS "catch-adapter" )
-message( STATUS "Git current branch: ${GIT_BRANCH}" )
-message( STATUS "Git commit hash: ${GIT_HASH}" )
-message( STATUS "" )
-message( STATUS "-----------------------------------------------------------" )
+set( CMAKE_CXX_STANDARD 17 )
+set( CMAKE_CXX_STANDARD_REQUIRED YES )
+
+option( catch-adapter_unit_tests
+    "Compile the catch-adapter unit tests and integrate with ctest" ON
+    )
+option( strict_compile
+    "Treat all warnings as errors." ON
+    )
+
+# Compile flags
+set( common_flags "-Wall" "-Wextra" "-Wpedantic" )
+set( strict_flags "-Werror" )
+set( release_flags "-O3" )
+set( debug_flags "-O0" "-g" )
+
+
+########################################################################
+# Project targets
+########################################################################
 
 add_library( catch-adapter INTERFACE )
-target_include_directories( catch-adapter INTERFACE src/single_include )
-target_sources( catch-adapter INTERFACE
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/single_include/catch.hpp" )
-target_include_directories( catch-adapter INTERFACE 
-                            "${CMAKE_CURRENT_SOURCE_DIR}/src/single_include" )
+target_include_directories( catch-adapter
+    INTERFACE src/single_include
+    )
+target_compile_options( catch-adapter INTERFACE
+    ${common_flags}
+    $<$<BOOL:${strict_compile}>:${strict_flags}>
+    $<$<CONFIG:DEBUG>:${debug_flags}>
+    $<$<CONFIG:RELEASE>:${release_flags}>
+    )
+
+
+#######################################################################
+# Top-level Only
+#######################################################################
+
+if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
+
+    # unit testing
+    if( catch-adapter_unit_tests )
+        include( cmake/unit_testing.cmake )
+    endif()
+
+endif()
